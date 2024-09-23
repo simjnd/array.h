@@ -40,6 +40,7 @@ In **ONE** file, define `ARRAY_IMPL` **before** including the header file.
 # Documentation
 ---
 
+**arr_new**
 ```c
 array_t arr_new(int n, size_t size);
 ```
@@ -55,6 +56,8 @@ int main(void) {
 }
 ```
 
+**arr_from**
+
 ```c
 array_t arr_from(void* arr, int n, size_t size);
 ```
@@ -63,18 +66,22 @@ Allocates a new array on the heap, initialized with content from `arr`.
 *Example*
 ```c
 int main(void) {
-  int* ints = arr_new((int[]) {1, 2, 3, 4, 5}, 5, sizeof(int));
+  int* ints = arr_from((int[]) {1, 2, 3, 4, 5}, 5, sizeof(int));
   for (int i = 0; i < arr_len(ints); i++) {
     printf("%d\0", ints[i]);
   }
 }
 ```
 
+**arr_len**
+
 ```c
 int arr_len(array_t arr);
 ```
 Returns the length of an array. The array must have been allocated with
 `arr_new` or `arr_from` as this function simply reads the header and returns it.
+
+**arr_free**
 
 ```c
 int arr_free(array_t arr);
