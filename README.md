@@ -74,7 +74,7 @@ Allocates a new array on the heap, initialized with content from `arr`.
 int main(void) {
   int* ints = arr_from((int[]) {1, 2, 3, 4, 5}, 5, sizeof(int));
   for (int i = 0; i < arr_len(ints); i++) {
-    printf("%d\0", ints[i]);
+    printf("%d\n", ints[i]);
   }
 }
 ```
@@ -95,3 +95,24 @@ int arr_free(array_t arr);
 Frees the array that was allocated through `arr_new` or `arr_from`. This is
 necessary as it will free the correct pointer at the start of the header, not
 the pointer to the data that the user has access to.
+
+**arr_each**
+
+```c
+arr_each(idx, arr) { ... }
+```
+`arr_each` is a macro that simplifies iterating over an `array_t`. It is an
+alias for `for (int idx = 0; idx < arr_len(arr); idx++)`.
+
+**Example**
+```c
+int main(void) {
+  int* ints = arr_new(10, sizeof(int));
+  arr_each(i, ints) {
+    ints[i] = i * 10;
+  }
+  arr_each(i, ints) {
+    printf("ints[%d] = %d\n", i, ints[i]);
+  }
+}
+```

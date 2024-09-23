@@ -9,6 +9,7 @@ array_t arr_new(int n, size_t size);
 array_t arr_from(void* arr, int n, size_t size);
 int arr_len(array_t arr);
 int arr_free(array_t arr);
+#define arr_each(idx, arr) for (int idx = 0; idx < arr_len(arr); idx++)
 
 #endif
 
