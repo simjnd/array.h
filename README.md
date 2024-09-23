@@ -15,6 +15,11 @@ This is all made transparent to the user as the pointer they receive is at the
 data portion of the array so you can read and assign to it as with a traditional
 array.
 
+Portability has been considered by providing a macro that abstracts dynamic
+allocation and de-allocation. The user can replace the default value by whatever
+mechanism he chooses to perform memory allocations. The macros are `_arr_alloc` 
+and `_arr_dealloc`, which default to `malloc` and `free`.
+
 ```
 +--------+--------------------+
 | Length | Array content      |
